@@ -1,0 +1,80 @@
+pipeline {
+    agent {
+        docker {
+            image 'trufflesuite/ganache-cli' // Use Ganache Docker Image
+            args '--user root' // Run as root inside the container
+        }
+    }
+
+    environment {
+        NODE_VERSION = "18"  // Define the Node.js version
+        GANACHE_PORT = "8545"
+        GANACHE_HOST = "74.208.195.193"
+    }
+
+    stages {
+        stage('Install Node.js & NPM') {
+            steps {
+                script {
+                    sh '''
+                    # Install Node.js and NPM
+                    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+                    apt-get install -y nodejs
+                    node -v
+                    npm -v
+                    '''
+                }
+            }
+        }
+
+        stage('Install Truffle & Ganache') {
+            steps {
+                script {
+                    sh '''
+                    # Install Truffle and Ganache CLI
+                    npm install -g truffle ganache-cli
+                    truffle version
+                    '''
+                }
+            }
+        }
+
+        stage('Setup & Compile Contracts') {
+            steps {
+                script {
+                    sh '''
+                    # Install dependencies
+                    npm install
+
+                    # Compile Smart Contracts
+                    truffle compile
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to Local Blockchain') {
+            steps {
+                script {
+                    sh '''
+                    # Start Ganache (optional if not already running)
+                    nohup ganache-cli --host ${GANACHE_HOST} --port ${GANACHE_PORT} --networkId 5777 > /dev/null 2>&1 &
+
+                    # Deploy contracts to the local blockchain
+                    cd smartcontracts
+                    truffle migrate --network development
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Smart Contracts successfully deployed to ${GANACHE_HOST}:${GANACHE_PORT}"
+        }
+        failure {
+            echo "❌ Deployment failed! Check logs."
+        }
+    }
+}

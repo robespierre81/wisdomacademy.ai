@@ -1,0 +1,161 @@
+.manage-container {
+    max-width         : 800px;
+    margin            : 100px auto;
+    padding           : 20px;
+    background        : var(--CoolGray10);
+    border-radius     : 10px;
+    box-shadow        : 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align        : center;
+    font-family       : 'helvetica', sans-serif;
+}
+
+.manage-container h2 {
+    color             : var(--Blue100);
+    font-size         : 24px;
+    margin-bottom     : 20px;
+}
+
+.form input,
+.fancy-dropdown {
+    padding           : 10px;
+    border-radius     : 8px;
+    border            : 1px solid #aaa;
+    background-color  : #fefefe;
+    font-size         : 16px;
+    color             : #333;
+    box-shadow        : 2px 2px 6px rgba(0, 0, 0, 0.1);
+    transition        : border-color 0.3s, box-shadow 0.3s;
+    width             : 100%;
+    box-sizing        : border-box;
+}
+
+.fancy-dropdown:hover {
+    border-color      : #5c9ded;
+    box-shadow        : 0 0 8px rgba(92, 157, 237, 0.5);
+}
+
+.add-btn,
+.save-btn {
+    background-color  : var(--Blue60);
+    color             : white;
+    padding           : 10px 20px;
+    border            : none;
+    border-radius     : 5px;
+    cursor            : pointer;
+    font-size         : 14px;
+    font-weight       : 500;
+    transition        : background-color 0.3s;
+}
+
+.add-btn:hover,
+.save-btn:hover {
+    background-color  : var(--Blue50);
+}
+
+.cancel-btn {
+    background-color  : var(--Gray40);
+    color             : white;
+    padding           : 10px 20px;
+    border            : none;
+    border-radius     : 5px;
+    cursor            : pointer;
+    font-size         : 14px;
+    font-weight       : 500;
+    transition        : background-color 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color  : var(--Gray60);
+}
+
+.plan-list {
+    margin-top        : 40px;
+}
+
+.item {
+    background        : white;
+    padding           : 15px 20px;
+    margin-bottom     : 15px;
+    border-radius     : 8px;
+    display           : flex;
+    justify-content   : space-between;
+    align-items       : center;
+    box-shadow        : 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.edit-btn,
+.delete-btn {
+    padding           : 6px 12px;
+    margin-left       : 10px;
+    border            : none;
+    border-radius     : 5px;
+    cursor            : pointer;
+    font-size         : 13px;
+}
+
+.edit-btn {
+    background-color  : var(--Blue30);
+    color             : white;
+}
+
+.edit-btn:hover {
+    background-color  : var(--Blue50);
+}
+
+.delete-btn {
+    background-color  : var(--Cyan70);
+    color             : white;
+}
+
+.delete-btn:hover {
+    background-color  : var(--Cyan90);
+}
+
+.fancy-select-group {
+    margin-bottom     : 20px;
+    text-align        : left;
+}
+
+.fancy-select-group label {
+    display           : block;
+    margin-bottom     : 8px;
+    font-weight       : 600;
+    color             : var(--Blue100);
+    font-size         : 14px;
+}
+
+.fancy-select-group select,
+.fancy-dropdown {
+    width             : 100%;
+    padding           : 10px;
+    border-radius     : 8px;
+    border            : 1px solid #aaa;
+    background-color  : #fff;
+    font-size         : 16px;
+    color             : #333;
+    box-shadow        : 1px 1px 6px rgba(0, 0, 0, 0.08);
+    transition        : border-color 0.3s, box-shadow 0.3s;
+    cursor            : pointer;
+}
+
+.fancy-select-group select:hover,
+.fancy-dropdown:hover {
+    border-color      : var(--Blue60);
+    box-shadow        : 0 0 8px rgba(92, 157, 237, 0.5);
+}
+
+.fancy-select-group select {
+    appearance        : none;
+    background-image  : url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat : no-repeat;
+    background-position: right 10px center;
+    background-size   : 16px 16px;
+    padding-right     : 30px;
+}
+
+.info-icon {
+    cursor              : help;
+    margin-left         : 5px;
+    font-size           : 0.9em;
+    color               : #007bff;
+}

@@ -1,0 +1,70 @@
+pipeline {
+    agent any
+    tools {
+        git 'Git'  // Remove Maven, we don't need it for Python
+    }
+
+
+    environment {
+        GIT_REPO = "ssh://bodi@74.208.195.193:1981/work/git/keks.git"
+        DOCKER_IMAGE = "wisdom-keks-server"
+        DOCKER_CONTAINER = "wisdom-keks-server"
+        DOCKER_HOST = "tcp://74.208.195.193:2375"
+        PYTHON_ENV = "venv"  // Virtual environment name
+    }
+    
+    stages {
+        stage('Checkout Git') {
+            steps {
+                git branch: 'main', 
+                    credentialsId: 'bodi', 
+                    url: 'ssh://74.208.195.193:1981/work/git/keks.git'
+            }
+        }
+        stage('Set Up Python Environment') {
+            steps {
+                script {
+                     sh '''
+                        echo "Installing Python dependencies..."
+                        python3 -m venv venv  # Create virtual environment
+                        . venv/bin/activate    # Use . instead of source
+                        pip install --upgrade pip
+                        pip install -r requirements.txt  # Install dependencies
+                        deactivate
+                        '''
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.withServer("${DOCKER_HOST}") {
+                        echo "Building Docker image: ${DOCKER_IMAGE}"
+                        docker.build("${DOCKER_IMAGE}", ".")
+                    }
+                }
+            }
+        }
+
+        stage('Remove running Application') {
+            steps {
+                script {
+                    sh '''
+                    docker stop wisdom-keks-server || true
+                    docker rm wisdom-keks-server || true
+                    '''
+                }
+            }
+        }
+
+        stage('Run Application') {
+            steps {
+                script {
+                    sh '''
+                    docker run -d --name ${DOCKER_CONTAINER} -p 5000:5000 ${DOCKER_IMAGE}
+                    '''
+                }
+            }
+        }
+    }
+}

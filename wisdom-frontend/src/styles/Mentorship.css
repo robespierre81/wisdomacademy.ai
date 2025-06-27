@@ -1,0 +1,207 @@
+.mentorship-page {
+    padding                     : 20px;
+    text-align                  : center;
+    margin-top                  : 100px;
+}
+
+ul {
+    list-style                  : none;
+    padding                     : 0;
+}
+
+li {
+    background                  : var(--CoolGray10);
+    padding                     : 15px;
+    margin-bottom               : 10px;
+    border-radius               : 10px;
+    box-shadow                  : 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mentor-form {
+    display                     : flex;
+    flex-direction              : column;
+    align-items                 : center;
+    gap                         : 10px;
+    margin-top                  : 20px;
+}
+
+.mentor-form input,
+.mentor-form textarea {
+    width                       : 80%;
+    padding                     : 8px;
+    border                      : 1px solid var(--CoolGray40);
+    border-radius               : 5px;
+}
+
+.mentor-form button {
+    padding                     : 10px 15px;
+    background-color            : var(--Blue60);
+    color                       : white;
+    border                      : none;
+    border-radius               : 5px;
+    cursor                      : pointer;
+}
+
+.mentor-form button:hover {
+    background-color            : var(--Blue50);
+}
+
+.no-mentors {
+    background                  : var(--CoolGray10);
+    padding                     : 30px 20px;
+    margin                      : 30px auto;
+    border                      : 1px solid var(--CoolGray30);
+    border-radius               : 12px;
+    box-shadow                  : 0 4px 16px rgba(0, 0, 0, 0.08);
+    max-width                   : 600px;
+    text-align                  : center;
+}
+
+.no-mentors p {
+    margin                      : 10px 0;
+    font-size                   : 1.1rem;
+    color                       : var(--CoolGray80);
+}
+
+.no-mentors a {
+    display                     : inline-block;
+    margin-top                  : 10px;
+    color                       : var(--Blue60);
+    font-weight                 : bold;
+    text-decoration             : none;
+    border-bottom               : 2px solid transparent;
+    transition                  : all 0.2s ease-in-out;
+}
+
+.no-mentors a:hover {
+    border-color                : var(--Blue60);
+    color                       : var(--Blue50);
+}
+
+.become-mentor {
+    background-color            : var(--CoolGray10);
+    border-radius               : 12px;
+    padding                     : 30px;
+    max-width                   : 600px;
+    margin                      : 40px auto;
+    margin-top                  : 100px;
+    box-shadow                  : 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.become-mentor h2 {
+    font-size                   : 1.8rem;
+    margin-bottom               : 20px;
+    color                       : var(--CoolGray100);
+    text-align                  : center;
+}
+
+.become-mentor form {
+    display                     : flex;
+    flex-direction              : column;
+    gap                         : 15px;
+}
+
+.become-mentor input,
+.become-mentor textarea {
+    padding                     : 12px;
+    border                      : 1px solid var(--CoolGray40);
+    border-radius               : 6px;
+    font-size                   : 1rem;
+    background-color            : white;
+    color                       : var(--CoolGray90);
+    transition                  : border-color 0.2s ease-in-out;
+}
+
+.become-mentor input:focus,
+.become-mentor textarea:focus {
+    border-color                : var(--Blue60);
+    outline                     : none;
+}
+
+.become-mentor textarea {
+    min-height                  : 100px;
+    resize                      : vertical;
+}
+
+.become-mentor button {
+    padding                     : 12px 20px;
+    background-color            : var(--Blue60);
+    color                       : white;
+    font-weight                 : bold;
+    border                      : none;
+    border-radius               : 6px;
+    cursor                      : pointer;
+    transition                  : background-color 0.2s ease-in-out;
+}
+
+.become-mentor button:hover {
+    background-color            : var(--Blue50);
+}
+
+.mentor-sessions {
+    background-color            : var(--CoolGray10);
+    padding                     : 40px 30px;
+    max-width                   : 800px;
+    margin                      : 50px auto;
+    border-radius               : 12px;
+    box-shadow                  : 0 6px 20px rgba(0, 0, 0, 0.08);
+    margin-top                  : 100px;
+}
+
+.mentor-sessions h2 {
+    font-size                   : 2rem;
+    margin-bottom               : 30px;
+    text-align                  : center;
+    color                       : var(--CoolGray100);
+}
+
+.session-card {
+    background                  : white;
+    border-left                 : 6px solid var(--Blue60);
+    padding                     : 20px 25px;
+    margin-bottom               : 20px;
+    border-radius               : 10px;
+    box-shadow                  : 0 4px 16px rgba(0, 0, 0, 0.05);
+    transition                  : transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.session-card:hover {
+    transform                   : translateY(-3px);
+    box-shadow                  : 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+.session-card p {
+    margin                      : 6px 0;
+    font-size                   : 1rem;
+    color                       : var(--CoolGray90);
+    line-height                 : 1.5;
+}
+
+.session-card strong {
+    color                       : var(--CoolGray100);
+}
+
+.no-sessions {
+    text-align                  : center;
+    background-color            : var(--CoolGray20);
+    padding                     : 30px 20px;
+    border-radius               : 10px;
+    color                       : var(--CoolGray80);
+    font-size                   : 1.1rem;
+    margin-top                  : 20px;
+}
+
+.no-sessions a {
+    display                     : inline-block;
+    margin-top                  : 10px;
+    color                       : var(--Blue60);
+    font-weight                 : 600;
+    text-decoration             : none;
+    border-bottom               : 2px solid transparent;
+    transition                  : all 0.2s ease;
+}
+
+.no-sessions a:hover {
+    border-color                : var(--Blue60);
+    color                       : var(--Blue50);
+}

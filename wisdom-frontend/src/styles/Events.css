@@ -1,0 +1,48 @@
+.events-container {
+  padding                       : 20px;
+  margin-top                    : 100px;
+}
+
+.events-title {
+  font-size                     : 24px;
+  font-weight                   : bold;
+  margin-bottom                 : 16px;
+}
+
+.events-list {
+  display                       : flex;
+  flex-direction                : column;
+  gap                           : 16px;
+}
+
+.event-card {
+  border                        : 1px solid #ccc;
+  border-radius                 : 6px;
+  padding                       : 16px;
+  background-color              : #fdfdfd;
+  box-shadow                    : 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-title {
+  font-size                     : 20px;
+  font-weight                   : 600;
+  margin-bottom                 : 8px;
+}
+
+.event-description {
+  font-size                     : 16px;
+  margin-bottom                 : 8px;
+}
+
+.event-meta {
+  font-size                     : 14px;
+  color                         : #555;
+  margin-bottom                 : 10px;
+  line-height                   : 1.4;
+}
+
+.event-link {
+  font-size                     : 14px;
+  color                         : #0066cc;
+  text-decoration               : underline;
+}

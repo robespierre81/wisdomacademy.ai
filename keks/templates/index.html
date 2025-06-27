@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisdom AI</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/ui.general.css') }}">
+    <script src="{{ url_for('static', filename='web3/web3.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='web3/web3.js') }}"></script>
+    <script>
+        window.addEventListener("load", connectBlockchain);
+    </script>
+</head>
+<body>
+    <h1>Welcome to Wisdom AI</h1>
+    <p>Track your Learning progress and get AI-based learning predictions.</p>
+    <p>Use the API: <a href="/predict_plan/1">Get a Learning Plan</a></p>
+</body>
+</html>
+

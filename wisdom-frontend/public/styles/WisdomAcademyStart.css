@@ -1,0 +1,408 @@
+/* ✅ Custom Fonts */
+@font-face {
+    font-family                         : 'Railway';
+    src                                 : url('../fonts/railway.otf') format('opentype');
+}
+
+@font-face {
+    font-family                         : 'HelveticaThin';
+    src                                 : url('/fonts/HelveticaNeue-UltraLight.otf') format('opentype');
+}
+
+@font-face {
+    font-family                         : 'HelveticaNeue';
+    src                                 : url('/fonts/helveticaneue.otf') format('opentype');
+}
+
+/** ✅ Farbdefinition **/
+:root {
+    --Blue100                           : rgb(0, 17, 65);
+    --Blue60                            : rgb(15, 98, 254);
+    --Blue50                            : rgb(69, 137, 255);
+    --Blue30                            : rgb(166, 200, 255);
+    --Blue20                            : rgb(208, 226, 255);
+    --Blue10                            : rgb(237, 245, 255);
+    --Cyan90                            : rgb(1, 39, 73);
+    --Cyan70                            : rgb(0, 83, 154);
+    --CoolGray70                        : rgb(77, 83, 88);
+    --CoolGray40                        : rgb(162, 169, 176);
+    --CoolGray20                        : rgb(221, 225, 230);
+    --CoolGray10                        : rgb(242, 244, 248);
+}
+
+/* ✅ General Styling */
+body {
+    font-family                         : 'HelveticaThin', sans-serif;
+    margin                              : 0;
+    padding                             : 0;
+    color                               : var(--CoolGray70);
+    background-color                    : var(--CoolGray10);
+}
+
+/* ✅ Header */
+.header {
+    background-color                    : var(--Blue100);
+    color                               : white;
+    padding                             : 15px 20px;
+    display                             : flex;
+    align-items                         : center;
+    justify-content                     : space-between;
+    position                            : fixed;
+    top                                 : 0;
+    left                                : 0;
+    right                               : 0;
+    height                              : 80px;
+    z-index                             : 1000;
+}
+
+/* ✅ Logo (Left) */
+.logo-container {
+    flex                                : 1;
+}
+
+.logo-img {
+    height                              : 50px;
+    width                               : auto;
+    display                             : block;
+}
+
+/* ✅ Navigation (Centered) */
+.nav-container {
+    flex                                : 2;
+    display                             : flex;
+    justify-content                     : center;
+}
+
+.nav ul, .nav-list {
+    list-style                          : none;
+    padding                             : 0;
+    margin                              : 0;
+    display                             : flex;
+    gap                                 : 20px;
+}
+
+.nav ul li, .nav-item  {
+    display                             : inline;
+    background-color                    : var(--Blue100);
+    position                            : relative;
+    border-radius                       : 0px;
+    justify-content                     : center;
+}
+
+.nav ul li a, .nav-item a,
+.nav-item button {
+    color                               : var(--Blue30);
+    text-decoration                     : none;
+    justify-content                     : center;
+    font-size                           : 16px;
+    padding                             : 10px 15px;
+    transition                          : 0.3s ease-in-out;
+    background                          : none;
+    border                              : none;
+    cursor                              : pointer;
+    transition                          : color 0.3s ease, background 0.3s ease;
+}
+
+.nav ul li a:hover,.nav-item a:hover,
+.nav-item button:hover {
+    background-color                    : var(--Cyan90);
+    color                               : var(--Blue20);
+}
+
+/* ✅ Login Button (Right) */
+.login-container {
+    flex                                : 1;
+    display                             : flex;
+    justify-content                     : flex-end;
+}
+
+.login-btn {
+    background-color                    : var(--Blue60);
+    color                               : white;
+    padding                             : 10px 18px;
+    font-size                           : 16px;
+    border                              : none;
+    cursor                              : pointer;
+    border-radius                       : 5px;
+    transition                          : 0.3s ease-in-out;
+    width                               : 200px;
+}
+
+.login-btn:hover {
+    background-color                    : var(--Blue50);
+}
+
+.hero {
+    margin-top                          : 80px;
+    display                             : flex;
+    flex-direction                      : column;
+    align-items                         : center;
+    justify-content                     : center;
+    text-align                          : center;
+    color                               : white;
+    padding                             : 100px 20px;
+    font-size                           : 1.5rem;
+    height                              : 500px;
+    background                          : url('../pictures/wisdombanner.jpeg')no-repeat center bottom / cover;
+    position                            : relative;
+}
+
+.hero h2 {
+    font-family                         : 'HelveticaNeue', sans-serif;
+    font-size                           : 2.5em;
+    font-weight                         : 900;
+    color                               : var(--CoolGray10); /* Light Gray for readability */
+    text-shadow                         : 2px 2px 8px rgba(0, 0, 0, 0.7); /* Soft shadow for contrast */
+}
+
+/* ✅ Dark Overlay for Readability */
+.hero::before {
+    content                             : "";
+    position                            : absolute;
+    top                                 : 0;
+    left                                : 0;
+    width                               : 100%;
+    height                              : 100%;
+    background                          : rgba(0, 0, 0, 0.5);
+    z-index                             : 1;
+}
+
+.hero .container {
+    font-family                         : 'HelveticaThin', sans-serif;
+    position                            : relative;
+    z-index                             : 2;
+}
+
+/* ✅ CTA Button */
+.hero .cta {
+    background-color                    : var(--Blue60);
+    color                               : white;
+    padding                             : 12px 20px;
+    font-size                           : 18px;
+    text-decoration                     : none;
+    border-radius                       : 5px;
+    display                             : inline-block;
+    margin-top                          : 15px;
+    transition                          : 0.3s ease-in-out;
+}
+
+.hero .cta:hover {
+    background-color                    : var(--Blue50);
+}
+
+/* ✅ Sections */
+section {
+    padding                             : 80px 20px;
+    text-align                          : center;
+}
+
+h2 {
+    font-size                           : 28px;
+    color                               : var(--Blue50);
+    margin-bottom                       : 20px;
+}
+
+.dropdown-arrow {
+    font-size                           : 12px;
+    margin-left                         : 5px;
+}
+
+.dropdown-menu {
+    position                            : absolute;
+    top                                 : 100%;
+    left                                : 0;
+    list-style                          : none;
+    opacity                             : 0;
+    margin                              : 0px;
+    padding                             : 0px;
+    visibility                          : hidden;
+    animation                           : fadeIn 0.2s ease forwards;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown button[aria-expanded="true"] + .dropdown-menu {
+    opacity                             : 1;
+    visibility                          : visible;
+}
+
+.dropdown-menu li a {
+    color                               : var(--CoolGray20);
+    padding                             : 8px 15px;
+    display                             : block;
+    text-decoration                     : none;
+    justify-content                     : center;
+    font-size                           : 16px;
+    padding                             : 10px 15px;
+    margin                              : 0px;
+    padding                             : 0px;
+    transition                          : color 0.2s ease, background 0.2s ease;
+}
+
+.dropdown-menu li a:hover {
+    color                               : var(--Blue60);
+    background-color                    : var(--Blue10);
+}
+
+/* Quiz Section */
+.quiz-section {
+    margin-top                          : 40px;
+    text-align                          : center;
+}
+
+.quiz-section h3 {
+    color                               : var(--Blue60);
+    margin-bottom                       : 20px;
+}
+
+.quiz-form {
+  display                               : flex;
+  flex-wrap                             : wrap;
+  justify-content                       : center;
+  gap                                   : 20px;
+  max-width                             : 800px;
+  margin                                : 0 auto;
+}
+
+.quiz-form label {
+  display                               : flex;
+  flex-direction                        : column;
+  align-items                           : center;
+  font-size                             : 14px;
+  color                                 : var(--CoolGray70);
+}
+
+.quiz-form select {
+  margin-top                            : 5px;
+  padding                               : 8px;
+  border-radius                         : 5px;
+  border                                : 1px solid var(--CoolGray20);
+  width                                 : 150px;
+}
+
+.quiz-submit-btn {
+  background-color                      : var(--Blue60);
+  color                                 : white;
+  padding                               : 10px 20px;
+  border                                : none;
+  border-radius                         : 5px;
+  cursor                                : pointer;
+  transition                            : background 0.3s ease;
+}
+
+.quiz-submit-btn:hover {
+  background-color                      : var(--Blue50);
+}
+
+.quiz-result {
+  margin-top                            : 20px;
+  font-size                             : 16px;
+  color                                 : var(--Blue60);
+  font-weight                           : bold;
+}
+
+/* ✅ Features & Services */
+.features ul,
+.services ul {
+    list-style                          : none;
+    padding                             : 0;
+    display                             : flex;
+    flex-wrap                           : wrap;
+    justify-content                     : center;
+}
+
+.features ul li,
+.services ul li {
+    list-style: none;
+    background: white;
+    padding: 15px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+}
+
+/* ✅ Footer */
+.footer {
+    background-color: var(--Blue100);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-container {
+        justify-content: center;
+        padding-top: 10px;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero {
+        height: 400px;
+        font-size: 1.2rem;
+    }
+
+    section {
+        padding: 50px 20px;
+    }
+
+    .features ul,
+    .services ul {
+        flex-direction: column;
+    }
+
+    .login-container {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .login-btn {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+.about {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 50px 5%;
+    background-color: var(--CoolGray10);
+}
+
+.about-tile {
+    flex: 1 1 calc(50% - 20px);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.about-tile:hover {
+    transform: translateY(-5px);
+}
+
+.about-tile h3 {
+    color: var(--Blue60);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.about-tile p {
+    color: var(--CoolGray70);
+    font-size: 16px;
+    line-height: 1.6;
+}

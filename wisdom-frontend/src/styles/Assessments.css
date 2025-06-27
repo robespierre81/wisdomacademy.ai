@@ -1,0 +1,52 @@
+.assessments-overview {
+    margin-top                          : 80px;
+    padding                             : 20px;
+    text-align                          : center;
+}
+
+.assessment-list {
+    display                             : grid;
+    grid-template-columns               : repeat(auto-fit, minmax(300px, 1fr));
+    gap                                 : 20px;
+    padding                             : 20px;
+}
+
+.assessment-card {
+    background                          : #fff;
+    border-radius                       : 10px;
+    box-shadow                          : 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding                             : 20px;
+    text-align                          : center;
+    transition                          : transform 0.2s;
+}
+
+.assessment-card:hover {
+    transform                           : scale(1.02);
+}
+
+.icon {
+    font-size                           : 40px;
+    margin-bottom                       : 10px;
+}
+
+.locked {
+    color                               : red;
+}
+
+.owned {
+    color                               : green;
+}
+
+.view-details-btn {
+    display                             : inline-block;
+    padding                             : 10px 20px;
+    margin-top                          : 10px;
+    background                          : #007bff;
+    color                               : white;
+    text-decoration                     : none;
+    border-radius                       : 5px;
+}
+
+.view-details-btn:hover {
+    background                          : #0056b3;
+}

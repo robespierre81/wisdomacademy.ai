@@ -1,0 +1,40 @@
+.badges-container {
+  padding                       : 20px;
+  margin-top                    : 100px;
+}
+
+.badges-title {
+  font-size                     : 24px;
+  font-weight                   : bold;
+  margin-bottom                 : 16px;
+}
+
+.badges-grid {
+  display                       : grid;
+  grid-template-columns         : repeat(auto-fill, minmax(160px, 1fr));
+  gap                           : 16px;
+}
+
+.badge-card {
+  border                        : 1px solid #ccc;
+  border-radius                 : 8px;
+  padding                       : 12px;
+  text-align                    : center;
+  box-shadow                    : 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.badge-icon {
+  width                         : 64px;
+  height                        : 64px;
+  margin-bottom                 : 8px;
+}
+
+.badge-name {
+  font-weight                   : 600;
+  margin                        : 8px 0 4px;
+}
+
+.badge-description {
+  font-size                     : 14px;
+  color                         : #555;
+}

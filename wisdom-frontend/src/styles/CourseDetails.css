@@ -1,0 +1,133 @@
+.course-details {
+    max-width                           : 900px;
+    margin                              : auto;
+    margin-top                          : 80px;
+    padding                             : 20px;
+    background                          : var(--CoolGray20);
+    border-radius                       : 8px;
+    box-shadow                          : 0 4px 10px rgba(0, 17, 65, 0.1);
+}
+
+.course-image {
+    width                               : 100%;
+    max-height                          : 300px;
+    object-fit                          : cover;
+    border-radius                       : 8px;
+}
+
+h1 {
+    font-size                           : 24px;
+    margin                              : 15px 0;
+    color                               : var(--Blue100);
+}
+
+p {
+    font-size                           : 16px;
+    color                               : var(--CoolGray70);
+}
+
+strong {
+    color                               : var(--CoolGray40);
+}
+
+.progress-bar {
+    width                               : 100%;
+    background                          : var(--CoolGray40);
+    border-radius                       : 5px;
+    height                              : 10px;
+    margin                              : 15px 0;
+    position                            : relative;
+    overflow                            : hidden;
+}
+
+.progress {
+    height                              : 100%;
+    background                          : var(--SuccessGreen);
+    border-radius                       : 5px;
+    transition                          : width 0.4s ease-in-out;
+}
+
+/* Lessons List */
+.lessons-list {
+    margin-top                          : 20px;
+}
+
+.lesson-card {
+    background                          : var(--CoolGray10);
+    padding                             : 15px;
+    margin-bottom                       : 10px;
+    border-radius                       : 5px;
+    border-left                         : 5px solid var(--Blue50);
+    transition                          : 0.3s;
+}
+
+.lesson-card:hover {
+    background                          : var(--Blue20);
+}
+
+.lesson-card.completed {
+    border-left                         : 5px solid var(--SuccessGreen);
+    background                          : var(--CoolGray20);
+}
+
+.lesson-content {
+    margin-top                          : 10px;
+    padding-left                        : 10px;
+}
+
+.lesson-content-item {
+    margin-top                          : 8px;
+}
+
+.lesson-content-item video,
+.lesson-content-item audio {
+    width                               : 100%;
+    max-width                           : 600px;
+    display                             : block;
+    margin                              : auto;
+}
+
+.start-lesson-btn {
+    background                          : var(--Blue60);
+    color                               : white;
+    border                              : none;
+    padding                             : 10px;
+    cursor                              : pointer;
+    font-weight                         : bold;
+    width                               : 100%;
+    text-align                          : center;
+    border-radius                       : 5px;
+    margin-top                          : 10px;
+}
+
+.start-lesson-btn:hover {
+    background                          : var(--Blue100);
+}
+
+.buy-btn {
+    background: var(--Blue60);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: var(--Blue100);
+}
+
+/* Lesson Icons */
+.lesson-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.lesson-icon.video { color: var(--Blue60); }
+.lesson-icon.audio { color: var(--Cyan70); }
+.lesson-icon.presentation { color: var(--CoolGray70); }
+.lesson-icon.exercise { color: var(--SuccessGreen); }
+.lesson-icon.assessment { color: var(--WarningOrange); }

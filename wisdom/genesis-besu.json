@@ -1,0 +1,27 @@
+{
+  "config": {
+    "chainId": 2307,
+    "constantinoplefixblock": 0,
+    "contractSizeLimit": 2147483647,
+    "ibft2": {
+      "blockperiodseconds": 5,
+      "epochlength": 30000,
+      "requesttimeoutseconds": 10
+    }
+  },
+  "difficulty": "0x1",
+  "gasLimit": "0x1fffffffffffff",
+  "extraData": "0xf84ea00000000000000000000000000000000000000000000000000000000000000000d5945ae47b3d0206fa42386189cf33bc21e3938a0386945ae47b3d0206fa42386189cf33bc21e3938a038600c0  ",
+  "alloc": {
+    "5ae47b3d0206fa42386189cf33bc21e3938a0386": {
+      "balance": "1000000000000000000000000"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x5",
+  "mixHash": "0x63746963616c6c792066616e637965",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}

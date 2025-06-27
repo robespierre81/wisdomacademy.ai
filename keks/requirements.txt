@@ -1,0 +1,9 @@
+flask
+flask-cors
+flask-talisman
+flask-restful
+fastapi
+psycopg2
+numpy
+pandas
+scikit-learn

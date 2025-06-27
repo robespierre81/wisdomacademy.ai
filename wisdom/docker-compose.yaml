@@ -1,0 +1,363 @@
+version: '3.8'
+
+networks:
+  ethereum-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24  # Custom subnet for static IPs
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:
+  node4-data:
+  node5-data:
+  node6-data:
+  node7-data:
+  node8-data:
+  beacon-data-1:
+  beacon-data-2:
+  beacon-data-3:
+  beacon-data-4:
+
+services:
+  wisdom-node-1:
+    image: wisdom-blockchain
+    container_name: wisdom-node-1
+    restart: unless-stopped
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.100  # Static IP
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+      - "30303:30303/udp"
+    volumes:
+      - node1-data:/data
+      - /var/jenkins_home/shared-jwt:/shared-jwt
+      - /var/jenkins_home/wisdom/password.txt:/data/password.txt
+      - /var/jenkins_home/wisdom/keystore:/data/keystore
+    entrypoint: /bin/sh -c "
+      rm -rf /data/geth/chaindata /data/geth/nodes &&
+      geth --datadir /data init /app/genesis.json &&
+      geth --datadir /data \
+        --syncmode full \
+        --networkid 2307 \
+        --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,admin,net,personal,miner,clique \
+        --allow-insecure-unlock \
+        --http.corsdomain 'https://wisdomacademy.ai,http://wisdomacademy.ai,https://www.wisdomacademy.ai,http://www.wisdomacademy.ai' \
+        --http.vhosts='*' \
+        --mine --miner.etherbase '0x537b99030e34458e9b28fff0cecd616c6853e4f0' \
+        --unlock '0x537b99030e34458e9b28fff0cecd616c6853e4f0' \
+        --password /data/password.txt \
+        --verbosity 3 \
+        --ws --ws.addr '0.0.0.0' --ws.port 8546 --ws.api 'eth,net,web3,personal,miner,clique' \
+        --ws.origins 'https://wisdomacademy.ai,http://wisdomacademy.ai,https://www.wisdomacademy.ai,http://www.wisdomacademy.ai' --mine \
+        --authrpc.addr 0.0.0.0 \
+        --authrpc.port 9551 \
+        --authrpc.vhosts=* \
+        --authrpc.jwtsecret /shared-jwt/jwt.hex
+      "
+
+  wisdom-node-2:
+    image: wisdom-blockchain
+    container_name: wisdom-node-2
+    #restart: unless-stopped
+    depends_on:
+      - wisdom-node-1
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.101
+    ports:
+      - "8547:8545"
+      - "8548:8546"
+      - "30304:30303"
+      - "30304:30303/udp"
+    volumes:
+      - node2-data:/data
+    entrypoint: /bin/sh -c "
+      sleep 20 &&
+      geth --datadir /data init /app/genesis.json &&
+      geth --datadir /data \
+        --syncmode snap \
+        --networkid 2307 \
+        --bootnodes 'enode://cbc140b9c3fe4f76add1229b19c87713668d88e938a25dacc6bb95dffbe57c66dd7eef24fc5f590db7b9e97b52fcfa11c20f38cc1d790fe9cc7244556310d15b@192.168.1.100:30303' \
+        --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,admin,net,personal,miner,clique \
+        --mine --miner.etherbase '0x5ae47b3d0206fa42386189cf33bc21E3938A0386'
+      "
+
+  wisdom-node-3:
+    image: wisdom-blockchain
+    container_name: wisdom-node-3
+    #restart: unless-stopped
+    depends_on:
+      - wisdom-node-1
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.102
+    ports:
+      - "8549:8545"
+      - "8550:8546"
+      - "30305:30303"
+      - "30305:30303/udp"
+    volumes:
+      - node3-data:/data
+    entrypoint: /bin/sh -c "
+      sleep 20 &&
+      geth --datadir /data init /app/genesis.json &&
+      geth --datadir /data \
+        --syncmode snap \
+        --networkid 2307 \
+        --bootnodes 'enode://cbc140b9c3fe4f76add1229b19c87713668d88e938a25dacc6bb95dffbe57c66dd7eef24fc5f590db7b9e97b52fcfa11c20f38cc1d790fe9cc7244556310d15b@192.168.1.100:30303' \
+        --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,admin,net,personal,miner,clique \
+        --mine --miner.etherbase '0x5ae47b3d0206fa42386189cf33bc21E3938A0386'
+      "
+
+  wisdom-node-4:
+    image: wisdom-blockchain
+    container_name: wisdom-node-4
+    #restart: unless-stopped
+    depends_on:
+      - wisdom-node-1
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.103
+    ports:
+      - "8551:8545"
+      - "8552:8546"
+      - "30306:30303"
+      - "30306:30303/udp"
+    volumes:
+      - node4-data:/data
+    entrypoint: /bin/sh -c "
+      sleep 20 &&
+      geth --datadir /data init /app/genesis.json &&
+      geth --datadir /data \
+        --syncmode snap \
+        --networkid 2307 \
+        --bootnodes 'enode://cbc140b9c3fe4f76add1229b19c87713668d88e938a25dacc6bb95dffbe57c66dd7eef24fc5f590db7b9e97b52fcfa11c20f38cc1d790fe9cc7244556310d15b@192.168.1.100:30303' \
+        --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,admin,net,personal,miner,clique \
+        --mine --miner.etherbase '0x5ae47b3d0206fa42386189cf33bc21E3938A0386'
+      "
+
+  wisdom-node-5:
+    image: wisdom-blockchain
+    container_name: wisdom-node-5
+    #restart: unless-stopped
+    depends_on:
+      - wisdom-node-1
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.104
+    ports:
+      - "8553:8545"
+      - "8554:8546"
+      - "30307:30303"
+      - "30307:30303/udp"
+    volumes:
+      - node5-data:/data
+    entrypoint: /bin/sh -c "
+      sleep 20 &&
+      geth --datadir /data init /app/genesis.json &&
+      geth --datadir /data \
+        --syncmode snap \
+        --networkid 2307 \
+        --bootnodes 'enode://cbc140b9c3fe4f76add1229b19c87713668d88e938a25dacc6bb95dffbe57c66dd7eef24fc5f590db7b9e97b52fcfa11c20f38cc1d790fe9cc7244556310d15b@192.168.1.100:30303' \
+        --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,admin,net,personal,miner,clique \
+        --mine --miner.etherbase '0x5ae47b3d0206fa42386189cf33bc21E3938A0386'
+      "
+
+  wisdom-node-6:
+    image: wisdom-blockchain
+    container_name: wisdom-node-6
+    #restart: unless-stopped
+    depends_on:
+      - wisdom-node-1
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.105
+    ports:
+      - "8555:8545"
+      - "8556:8546"
+      - "30308:30303"
+      - "30308:30303/udp"
+    volumes:
+      - node6-data:/data
+    entrypoint: /bin/sh -c "
+      sleep 20 &&
+      geth --datadir /data init /app/genesis.json &&
+      geth --datadir /data \
+        --syncmode snap \
+        --networkid 2307 \
+        --bootnodes 'enode://cbc140b9c3fe4f76add1229b19c87713668d88e938a25dacc6bb95dffbe57c66dd7eef24fc5f590db7b9e97b52fcfa11c20f38cc1d790fe9cc7244556310d15b@192.168.1.100:30303' \
+        --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,admin,net,personal,miner,clique \
+        --mine --miner.etherbase '0x5ae47b3d0206fa42386189cf33bc21E3938A0386'
+      "
+
+  wisdom-node-7:
+    image: wisdom-blockchain
+    container_name: wisdom-node-7
+    #restart: unless-stopped
+    depends_on:
+      - wisdom-node-1
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.106
+    ports:
+      - "8557:8545"
+      - "8558:8546"
+      - "30309:30303"
+      - "30309:30303/udp"
+    volumes:
+      - node7-data:/data
+    entrypoint: /bin/sh -c "
+      sleep 20 &&
+      geth --datadir /data init /app/genesis.json &&
+      geth --datadir /data \
+        --syncmode snap \
+        --networkid 2307 \
+        --bootnodes 'enode://cbc140b9c3fe4f76add1229b19c87713668d88e938a25dacc6bb95dffbe57c66dd7eef24fc5f590db7b9e97b52fcfa11c20f38cc1d790fe9cc7244556310d15b@192.168.1.100:30303' \
+        --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,admin,net,personal,miner,clique \
+        --mine --miner.etherbase '0x5ae47b3d0206fa42386189cf33bc21E3938A0386'
+      "
+
+  wisdom-node-8:
+    image: wisdom-blockchain
+    container_name: wisdom-node-8
+    #restart: unless-stopped
+    depends_on:
+      - wisdom-node-1
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.107
+    ports:
+      - "8559:8545"
+      - "8560:8546"
+      - "30310:30303"
+      - "30310:30303/udp"
+    volumes:
+      - node8-data:/data
+    entrypoint: /bin/sh -c "
+      sleep 20 &&
+      geth --datadir /data init /app/genesis.json &&
+      geth --datadir /data \
+        --syncmode snap \
+        --networkid 2307 \
+        --bootnodes 'enode://cbc140b9c3fe4f76add1229b19c87713668d88e938a25dacc6bb95dffbe57c66dd7eef24fc5f590db7b9e97b52fcfa11c20f38cc1d790fe9cc7244556310d15b@192.168.1.100:30303' \
+        --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,admin,net,personal,miner,clique \
+        --mine --miner.etherbase '0x5ae47b3d0206fa42386189cf33bc21E3938A0386'
+      "
+
+  beacon-1:
+    image: statusim/nimbus-eth2:multiarch-v25.3.1
+    container_name: beacon-node-1
+    #restart: unless-stopped
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.110
+    volumes:
+      - beacon-data-1:/data
+      - /home/user/.cache/nimbus:/home/user/.cache/nimbus
+      - /var/jenkins_home/shared-jwt:/shared-jwt
+      - /var/jenkins_home/nimbus-config:/data/custom
+      - /var/jenkins_home/nimbus-config/wisdomblockchainvalidatorkeystore:/data/wisdomblockchainvalidatorkeystore
+    depends_on:
+      - wisdom-node-1
+    ports:
+      - "5052:5052"
+    working_dir: /data/custom
+    command:
+      - --network=/data/custom
+      - --genesis-state=/data/custom/genesis.ssz
+      - --data-dir=/data
+      - --validators-dir=/data/wisdomblockchainvalidatorkeystore/validators
+      - --secrets-dir=/data/wisdomblockchainvalidatorkeystore/secrets
+      - --web3-url=http://192.168.1.100:9551
+      - --jwt-secret=/shared-jwt/jwt.hex
+      - --log-level=DEBUG
+      - --rest
+      - --rest-address=0.0.0.0
+      - --rest-port=5052
+
+  beacon-2:
+    image: statusim/nimbus-eth2:multiarch-v25.3.1
+    container_name: beacon-node-2
+    #restart: unless-stopped
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.111
+    volumes:
+      - beacon-data-2:/data
+      - /home/user/.cache/nimbus:/home/user/.cache/nimbus
+      - /var/jenkins_home/shared-jwt:/shared-jwt
+      - /var/jenkins_home/nimbus-config:/data/custom
+    depends_on:
+      - wisdom-node-1
+    ports:
+      - "5053:5052"
+    working_dir: /data/custom
+    command:
+      - --network=/data/custom
+      - --genesis-state=/data/custom/genesis.ssz
+      - --data-dir=/data
+      - --web3-url=http://192.168.1.100:9551
+      - --jwt-secret=/shared-jwt/jwt.hex
+      - --rest
+      - --rest-address=0.0.0.0
+      - --rest-port=5052
+
+  beacon-3:
+    image: statusim/nimbus-eth2:multiarch-v25.3.1
+    container_name: beacon-node-3
+    #restart: unless-stopped
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.112
+    volumes:
+      - beacon-data-3:/data
+      - /home/user/.cache/nimbus:/home/user/.cache/nimbus
+      - /var/jenkins_home/shared-jwt:/shared-jwt
+      - /var/jenkins_home/nimbus-config:/data/custom
+    depends_on:
+      - wisdom-node-1
+    ports:
+      - "5054:5052"
+    working_dir: /data/custom
+    command:
+      - --network=/data/custom
+      - --genesis-state=/data/custom/genesis.ssz
+      - --data-dir=/data
+      - --web3-url=http://192.168.1.100:9551
+      - --jwt-secret=/shared-jwt/jwt.hex
+      - --rest
+      - --rest-address=0.0.0.0
+      - --rest-port=5052
+
+  beacon-4:
+    image: statusim/nimbus-eth2:multiarch-v25.3.1
+    container_name: beacon-node-4
+    #restart: unless-stopped
+    networks:
+      ethereum-net:
+        ipv4_address: 192.168.1.113
+    volumes:
+      - beacon-data-4:/data
+      - /home/user/.cache/nimbus:/home/user/.cache/nimbus
+      - /var/jenkins_home/shared-jwt:/shared-jwt
+      - /var/jenkins_home/nimbus-config:/data/custom
+    depends_on:
+      - wisdom-node-1
+    ports:
+      - "5055:5052"
+    working_dir: /data/custom
+    command:
+      - --network=/data/custom
+      - --genesis-state=/data/custom/genesis.ssz
+      - --data-dir=/data
+      - --web3-url=http://192.168.1.100:9551
+      - --jwt-secret=/shared-jwt/jwt.hex
+      - --rest
+      - --rest-address=0.0.0.0
+      - --rest-port=5052
+

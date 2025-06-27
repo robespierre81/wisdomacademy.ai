@@ -1,0 +1,94 @@
+pipeline {
+    agent any
+    tools {
+        nodejs 'NodeJS 23' // Use the Node.js version configured in Jenkins
+        dockerTool 'Docker'
+    }
+    stages {
+        stage('Checkout Git') {
+            steps {
+                git branch: 'main', 
+                    credentialsId: 'bodi', 
+                    url: 'ssh://74.208.195.193:1981/work/git/wisdom-frontend.git'
+            }
+        }
+        stage('Clean NPM') {
+            steps {
+                sh '''
+                # Clean npm cache
+                npm cache clean --force
+                # Clean up node_modules and package-lock.json
+                rm -rf node_modules package-lock.json
+                '''
+            }
+        }
+        stage('Build') {
+            steps {
+                sh '''
+                # Reinstall dependencies
+                npm install
+                npm install --save-dev @babel/plugin-proposal-private-property-in-object
+                npm install --save-dev @babel/plugin-transform-private-property-in-object
+                '''
+            }
+        }
+        stage('Build Frontend') {
+            steps {
+                sh 'DISABLE_ESLINT_PLUGIN=true npm run build --verbose'
+            }
+        }
+        //stage('Test') {
+        //    steps {
+        //        // Optional: Run tests
+        //        sh 'npm test --passWithNoTests'
+        //    }
+        //}
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Set up Docker with external host
+                    docker.withServer('tcp://74.208.195.193:2375') {
+                        docker.build("wisdom-frontend:latest", ".")
+                    }
+                }
+            }
+        }
+        stage('Deploy to Docker Container') {
+            steps {
+                script {
+                    // Deploy container on the external Docker host
+                    docker.withServer('tcp://74.208.195.193:2375') {
+                        sh '''
+                        docker stop wisdom-frontend || true
+                        docker rm wisdom-frontend || true
+                        docker run -d --network=host -e DB_HOST=127.0.0.1 --name wisdom-frontend -p 8000:8000 -e PORT=8000 wisdom-frontend:latest 
+                        docker image prune -af
+                        '''
+                    }
+                }
+            }
+        }
+        stage('Check if Docker Container is Running') {
+            steps {
+                writeFile file: 'checkEndpoint.js', text: '''
+                    const http = require('http');
+                    http.get("http://localhost:8000/", (res) => {
+                        console.log(`STATUS: ${res.statusCode}`);
+                    }).on('error', (e) => {
+                        console.error(`Got error: ${e.message}`);
+                    });
+                '''
+                sh 'node checkEndpoint.js'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Build and deployment successful!'
+        }
+        failure {
+            echo 'Build or deployment failed.'
+        }
+    }
+}
+

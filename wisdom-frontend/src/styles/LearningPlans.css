@@ -1,0 +1,266 @@
+.lp-container {
+    padding                             : 2rem;
+    max-width                           : 1200px;
+    margin                              : 0 auto;
+    margin-top                          : 80px;
+    font-family                         : 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.lp-container h1 {
+    font-size                           : 2rem;
+    margin-bottom                       : 1.5rem;
+    color                               : #333;
+    text-align                          : center;
+}
+
+.lp-title {
+    font-size                           : 2.2rem;
+    font-weight                         : 600;
+    text-align                          : center;
+    margin-bottom                       : 2rem;
+    color                               : #333;
+}
+
+.lps-grid {
+    display                             : grid;
+    grid-template-columns               : repeat(auto-fit, minmax(280px, 1fr));
+    gap                                 : 1.5rem;
+}
+
+.lp-list {
+    display                             : grid;
+    grid-template-columns               : repeat(auto-fit, minmax(300px, 1fr));
+    gap                                 : 1.5rem;
+    list-style                          : none;
+    padding                             : 0;
+}
+
+.lp-list li {
+    display                             : flex;
+    justify-content                     : space-between;
+    background                          : #f8f8f8;
+    padding                             : 0.8rem 1rem;
+    border-radius                       : 6px;
+    margin-bottom                       : 0.5rem;
+    transition                          : background 0.3s;
+}
+
+.lp-list li:hover {
+    background                          : #eaeaea;
+}
+
+.lp-card {
+    background                          : #fff;
+    border-radius                       : 16px;
+    box-shadow                          : 0 4px 12px rgba(0, 0, 0, 0.07);
+    padding                             : 1.5rem;
+    transition                          : transform 0.2s ease, box-shadow 0.2s ease;
+    display                             : flex;
+    flex-direction                      : column;
+    justify-content                     : space-between;
+}
+
+.lp-card:hover {
+    transform                           : translateY(-5px);
+    box-shadow                          : 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.lp h2, .lp-card h3 {
+    font-size                           : 1.4rem;
+    margin-bottom                       : 0.5rem;
+    color                               : #2c3e50;
+}
+
+.lp-card p {
+    font-size                           : 0.95rem;
+    color                               : #666;
+    margin-bottom                       : 1rem;
+}
+
+.lp-meta {
+    font-size                           : 0.85rem;
+    color                               : #888;
+    margin-bottom                       : 0.5rem;
+}
+
+.lp-price {
+    font-size                           : 1rem;
+    font-weight                         : 500;
+    color                               : #16a085;
+    margin-bottom                       : 1rem;
+}
+
+.lp-card button {
+    background-color                    : #1abc9c;
+    color                               : white;
+    padding                             : 0.6rem 1rem;
+    font-size                           : 0.95rem;
+    border                              : none;
+    border-radius                       : 8px;
+    cursor                              : pointer;
+    transition                          : background-color 0.2s ease-in-out;
+}
+
+.lp-card button:hover {
+    background-color                    : #149a82;
+}
+
+.lp-card .created-by {
+    font-size                           : 0.85rem;
+    color                               : #888;
+    margin-top                          : auto;
+}
+
+.lp-card a {
+    margin-top                          : 1rem;
+    text-decoration                     : none;
+    background                          : #0d6efd;
+    color                               : white;
+    padding                             : 0.5rem 1rem;
+    border-radius                       : 8px;
+    text-align                          : center;
+    transition                          : background 0.2s ease;
+}
+
+.learning-plans ul {
+    list-style                          : none;
+    padding                             : 0;
+}
+
+
+
+.learning-plans li {
+    background: #f4f4f4;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.learning-plans li:hover {
+    background: #e0e0e0;
+}
+
+.learning-plan-details {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.learning-plan-details h1 {
+    text-align: center;
+    color: #222;
+}
+
+.learning-plan-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.learning-plan-details li {
+    background: #f9f9f9;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.lp-details-container {
+    max-width                           : 800px;
+    margin                              : 0 auto;
+    margin-top                          : 80px;
+    padding                             : 2rem;
+    background                          : #ffffff;
+    border-radius                       : 12px;
+    box-shadow                          : 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.lp-header {
+    text-align                          : center;
+    margin-bottom                       : 2rem;
+}
+
+.lp-subtitle {
+    color                               : #555;
+    font-size                           : 1.1rem;
+    margin                              : 0.5rem 0;
+}
+
+.lp-creator {
+    font-size                           : 0.9rem;
+    color                               : #777;
+}
+
+.lp-section {
+    margin-bottom: 2rem;
+}
+
+.lp-section h2 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 0.8rem;
+}
+
+.lp-item-title {
+    font-weight: 500;
+}
+
+.lp-price {
+    color: #008080;
+    font-weight: bold;
+}
+
+.lp-summary {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.lp-discount {
+    font-size: 1.3rem;
+    color: #007BFF;
+}
+
+.lp-buy-button {
+    margin-top: 1rem;
+    padding: 0.8rem 2rem;
+    background-color: #00c291;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.lp-buy-button:hover {
+    background-color: #00a87a;
+}
+
+.lp-loading,
+.lp-error {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 2rem;
+    color: #555;
+}
+
+
+

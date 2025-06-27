@@ -1,0 +1,47 @@
+.my-transactions {
+    text-align                          : center;
+    padding                             : 40px;
+    background-color                    : var(--CoolGray10);
+    min-height                          : 100vh;
+    margin-top                          : 100px;
+}
+
+.my-transactions h1 {
+    font-size                           : 2rem;
+    color                               : var(--Blue100);
+    margin-bottom                       : 20px;
+}
+
+.my-transactions p {
+    font-size                           : 1.1rem;
+    color                               : var(--CoolGray70);
+    margin-bottom                       : 15px;
+}
+
+.my-transactions ul {
+    list-style                  : none;
+    padding                     : 0;
+    margin                      : 0 auto;
+    max-width                   : 500px;
+}
+
+.my-transactions li {
+    background-color: var(--CoolGray20);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: var(--CoolGray70);
+    text-align: left;
+    line-height: 1.5;
+}
+
+.my-transactions li p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+.my-transactions li p:nth-child(1) {
+    font-weight: bold;
+    color: var(--Blue100);
+}

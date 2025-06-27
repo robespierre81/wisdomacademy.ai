@@ -1,0 +1,69 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven'
+        dockerTool 'Docker'
+    }
+    stages {
+        stage('Check Docker Daemon') {
+            steps {
+                script {
+                    try {
+                        // Check if Docker daemon is running
+                        def dockerInfo = sh(script: "docker --host=tcp://74.208.195.193:2375 info", returnStdout: true).trim()
+                        echo "Docker daemon is running. Info:\n${dockerInfo}"
+                    } catch (Exception e) {
+                        error "Docker daemon is not running or not reachable on tcp://74.208.195.193:2375. Please ensure Docker is running and accessible."
+                    }
+                }
+            }
+        }
+        stage('Checkout the Source Code') {
+            steps {
+                git branch: 'main', 
+                    credentialsId: 'bodi', 
+                    url: 'ssh://bodi@74.208.195.193:1981/work/git/backend.git'
+            }
+        }
+        stage('Build with Maven') {
+            steps {
+                // Run Maven build
+                sh 'mvn clean install'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    script {
+                        // Set up Docker with external host
+                        docker.withServer('tcp://74.208.195.193:2375') {
+                            docker.build("backend:latest", ".")
+                        }
+                    }
+                }
+            }
+        }
+        stage('Deploy to Docker Container') {
+            steps {
+                script {
+                    docker.withServer('tcp://74.208.195.193:2375') {
+                        sh '''
+                        docker stop wisdom-backend || true
+                        docker rm wisdom-backend || true
+                        docker run -d --network=host -e DB_HOST=127.0.0.1 -v /etc/letsencrypt/live/wisdomacademy.ai/keystore.p12:/etc/letsencrypt/live/wisdomacademy.ai/keystore.p12 --name wisdom-backend backend:latest
+                        '''
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Build and deployment successful!'
+        }
+        failure {
+            echo 'Build or deployment failed.'
+        }
+    }
+}
+

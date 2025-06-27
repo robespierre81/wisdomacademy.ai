@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  python-server:
+    build: .
+    environment:
+      - FLASK_ENV=production
+    volumes:
+      - ./ssl:/app/ssl
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: bodi
+      POSTGRES_PASSWORD: BodiSteinbergOlga#2021
+      POSTGRES_DB: wisdom
+    ports:
+      - "5432:5432"

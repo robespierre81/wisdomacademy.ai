@@ -1,0 +1,53 @@
+#AddWeightForm {
+    display                 : inline-block;
+    width                   : 400px;
+}
+
+#AddWeightForm label {
+    display                 : inline-block;
+    width                   : 350px;
+}
+
+#AddWeightForm .labelform {
+    display                 : inline-block;
+    width                   : 150px;
+    height                  : 25px;
+    text-align              : right;
+    float                   : left;
+}
+
+#addWeightForm input {
+    display                 : inline-block;
+    width                   : 150px;
+    float                   : left;
+}
+
+.weight-container {
+    display                 : flex;
+    align-items             : flex-start;
+    width                   : 95%;
+}
+
+.weightTable {
+    width                   : 400px;
+    border-collapse         : collapse;
+    margin-right            : 20px;
+    float                   : left;
+}
+
+.weight-table th, .weight-table td {
+    padding                 : 8px;
+    border                  : 1px solid #ddd;
+    text-align              : right;
+}
+
+.weight-table-container {
+    display                 : inline-block;
+    width                   : 30%;
+    float                   : left;
+}
+
+.weight-chart {
+    width: 90%; 
+}
+

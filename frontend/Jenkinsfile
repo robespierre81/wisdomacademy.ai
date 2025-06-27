@@ -1,0 +1,94 @@
+pipeline {
+    agent any
+    tools {
+        nodejs 'NodeJS 23' // Use the Node.js version configured in Jenkins
+        dockerTool 'Docker'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', 
+                    credentialsId: 'bodi', 
+                    url: 'ssh://bodi@82.165.73.209:1981/work/git/frontend.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Run npm install
+                //sh 'npm install'
+                //sh 'npm install --save-dev @babel/plugin-proposal-private-property-in-object'
+                //sh 'npm install --save-dev @babel/plugin-transform-private-property-in-object'
+                //sh 'npm run build'
+                //sh 'ls -la dist'
+
+                sh '''
+                # Clean npm cache
+                npm cache clean --force
+                # Clean up node_modules and package-lock.json
+                rm -rf node_modules package-lock.json
+                # Reinstall dependencies
+                npm install
+                npm install --save-dev @babel/plugin-proposal-private-property-in-object
+                npm install --save-dev @babel/plugin-transform-private-property-in-object
+                '''
+            }
+        }
+        stage('Build Frontend') {
+            steps {
+                sh 'DISABLE_ESLINT_PLUGIN=true npm run build --verbose'
+            }
+        }
+        //stage('Test') {
+        //    steps {
+        //        // Optional: Run tests
+        //        sh 'npm test --passWithNoTests'
+        //    }
+        //}
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Set up Docker with external host
+                    docker.withServer('tcp://82.165.73.209:2375') {
+                        docker.build("frontend:latest", ".")
+                    }
+                }
+            }
+        }
+        stage('Deploy to Docker Container') {
+            steps {
+                script {
+                    // Deploy container on the external Docker host
+                    docker.withServer('tcp://82.165.73.209:2375') {
+                        sh '''
+                        docker stop frontend-container || true
+                        docker rm frontend-container || true
+                        docker run -d --network=host -e DB_HOST=127.0.0.1 --name frontend-container -e REACT_APP_API_URL=http://backend:8585 -p 9090:9090 -e PORT=9090 frontend:latest 
+                        '''
+                    }
+                }
+            }
+        }
+        stage('Check if Docker Container is Running') {
+            steps {
+                writeFile file: 'checkEndpoint.js', text: '''
+                    const http = require('http');
+                    http.get("http://localhost:8585/api/weights/all", (res) => {
+                        console.log(`STATUS: ${res.statusCode}`);
+                    }).on('error', (e) => {
+                        console.error(`Got error: ${e.message}`);
+                    });
+                '''
+                sh 'node checkEndpoint.js'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Build and deployment successful!'
+        }
+        failure {
+            echo 'Build or deployment failed.'
+        }
+    }
+}
+

@@ -1,0 +1,107 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven'
+    }
+    environment {
+        GIT_REPO = "ssh://bodi@74.208.195.193:1981/work/git/wisdom.git"
+        DOCKER_IMAGE = "wisdom-blockchain"
+        DOCKER_COMPOSE_PATH = "/tmp/docker-compose"
+        DOCKER_HOST = "tcp://74.208.195.193:2375"
+    }
+    stages {
+        stage('Check Docker Daemon') {
+            steps {
+                script {
+                    try {
+                        def dockerInfo = sh(script: "docker --host=${DOCKER_HOST} info", returnStdout: true).trim()
+                        echo "Docker daemon is running. Info:\n${dockerInfo}"
+                    } catch (Exception e) {
+                        error "Docker daemon is not running or reachable on ${DOCKER_HOST}. Please ensure Docker is running and accessible."
+                    }
+                }
+            }
+        }
+        stage('Install Docker Compose') {
+            steps {
+                script {
+                    sh '''
+                        echo "Installing Docker Compose..."
+                        rm -f ${DOCKER_COMPOSE_PATH}  # Ensure old file is removed
+                        curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o ${DOCKER_COMPOSE_PATH}
+                        chmod +x ${DOCKER_COMPOSE_PATH}
+                        ${DOCKER_COMPOSE_PATH} --version || (echo "Docker Compose installation failed" && exit 1)
+                    '''
+                }
+            }
+        }
+        stage('Configure Git') {
+            steps {
+                sh '''
+                git config --global user.email "jenkins@example.com"
+                git config --global user.name "Jenkins CI"
+                '''
+            }
+        }
+        stage('Clone Repository') {
+            steps {
+                git branch: 'master', 
+                    credentialsId: 'bodi', 
+                    url: "${GIT_REPO}"
+            }
+        }
+        stage('Remove Old Containers and Images') {
+            steps {
+                script {
+                    docker.withServer("${DOCKER_HOST}") {
+                        // Stop and remove existing containers
+                        sh """
+                            docker stop wisdom-node-1 wisdom-node-2 wisdom-node-3 besu-node || true
+                            docker rm wisdom-node-1 wisdom-node-2 wisdom-node-3 besu-node || true
+                        """
+
+                        // Remove existing Docker images
+                        sh """
+                            docker rmi wisdom-blockchain besu-blockchain || true
+                        """
+                    }
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.withServer("${DOCKER_HOST}") {
+                        echo "Building Docker image: ${DOCKER_IMAGE}"
+                        docker.build("${DOCKER_IMAGE}", ".")
+                    }
+                }
+            }
+        }
+        stage('Run Blockchain Network') {
+            steps {
+                script {
+                    docker.withServer("${DOCKER_HOST}") {
+                        // Ensure all old containers are removed
+                        sh """
+                            ${DOCKER_COMPOSE_PATH} -f docker-compose.yaml down
+                        """
+
+                        // Run the blockchain network with docker-compose
+                        sh """
+                            ${DOCKER_COMPOSE_PATH} -f docker-compose.yaml up -d
+                        """
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            echo '✅ Blockchain network is up and running!'
+        }
+        failure {
+            echo '❌ Pipeline failed. Check logs for details.'
+        }
+    }
+}

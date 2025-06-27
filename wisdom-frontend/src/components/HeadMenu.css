@@ -1,0 +1,162 @@
+/** ✅ Farbdefinition **/
+:root {
+    --Blue100                           : rgb(0, 17, 65);
+    --Blue60                            : rgb(15, 98, 254);
+    --Blue50                            : rgb(69, 137, 255);
+    --Blue30                            : rgb(166, 200, 255);
+    --Blue20                            : rgb(208, 226, 255);
+    --Blue10                            : rgb(237, 245, 255);
+    --Cyan90                            : rgb(1, 39, 73);
+    --Cyan70                            : rgb(0, 83, 154);
+    --CoolGray70                        : rgb(77, 83, 88);
+    --CoolGray40                        : rgb(162, 169, 176);
+    --CoolGray20                        : rgb(221, 225, 230);
+    --CoolGray10                        : rgb(242, 244, 248);
+    --SuccessGreen          :rgb( 34, 197,  94); /* Light Green */
+    --WarningOrange         :rgb(255, 140,   0); /* Orange Warning */
+    --ErrorRed              :rgb(220,  38,  38); /* Red Errors */
+}
+
+/* ✅ Head Menu */
+.headmenu {
+    background-color                    : var(--Blue100);
+    border-bottom                       : 1px solid var(--CoolGray70);
+    position                            : fixed;
+    top                                 : 0;
+    left                                : 0;
+    right                               : 0;
+    display                             : flex;
+    align-items                         : center;
+    justify-content                     : space-between;
+    padding                             : 0 20px;
+    z-index                             : 1000;
+}
+
+/* ✅ Logo */
+.menu-logo img {
+    height                              : 40px;
+}
+
+/* ✅ Centered Menu */
+.menu-container, .menu-right {
+    list-style                          : none;
+    display                             : flex;
+    gap                                 : 20px;
+    padding                             : 0px;
+    margin                              : 0px;
+    border-radius                       : 0px;
+    background-color                    : var(--Blue100);
+    padding                             : 10px 15px;
+}
+
+
+.menu-container li, menu-right li {
+    background-color                    : var(--Blue100);
+    position                            : relative;
+    font-size                           : 16px;
+    border-radius                       : 0px;
+}
+
+.menu-container a,
+.menu-container button,
+.menu-right a{
+    text-decoration                     : none;
+    color                               : var(--Blue30);
+    font-size                           : 16px;
+    padding                             : 0px 15px;
+    margin-top                          : 0px;
+    background                          : none;
+    border                              : none;
+    cursor                              : pointer;
+    transition                          : 0.3s ease-in-out;
+    align-items                         : center;
+    background-color                    : var(--Blue100);
+    border-radius                       : 0px;
+}
+
+.menu-container a:hover,
+.menu-container button:hover,
+.menu-right a:hover {
+    color                               : var(--Blue20);
+}
+
+.dropdown-btn {
+    background                          : none;
+    color                               : var(--CoolGray20);
+    font-size                           : 16px;
+    padding                             : 8px 15px;
+    border                              : none;
+    cursor                              : pointer;
+    display                             : flex;
+}
+
+/* ✅ Dropdown Menu */
+.dropdown-menu {
+    position                            : absolute;
+    top                                 : 100%;
+    left                                : 0;
+    background-color                    : var(--Blue100);
+    padding                             : 8px;
+    min-width                           : 180px;
+    box-shadow                          : 0 4px 6px rgba(0, 0, 0, 0.1);
+    display                             : flex;
+    flex-direction                      : column;
+    opacity                             : 1;
+    transition                          : opacity 0.3s ease-in-out;
+    z-index                             : 1001;
+}
+
+.dropdown:hover .dropdown-menu {
+    display                             : flex;
+    opacity                             : 1;
+    transform                           : translateY(0);
+}
+
+.dropdown-menu li {
+    background-color                    : var(--Blue100);
+    padding                             : 8px 10px;
+    white-space                         : nowrap;
+    border-radius                       : 0px;
+}
+
+.dropdown-menu li a {
+    text-decoration                     : none;
+    color                               : var(--Blue30);
+    font-size                           : 14px;
+    display                             : block;
+    transition                          : 0.3s ease-in-out;
+    padding                             : 8px 10px;
+}
+
+.dropdown-menu li a:hover {
+    color                               : var(--Blue20);
+}
+
+@media (max-width: 768px) {
+    .headmenu {
+        flex-direction                  : column;
+        padding                          : 10px;
+        height                           : auto;
+    }
+
+    .menu-container {
+        flex-direction                   : column;
+        gap                               : 10px;
+    }
+
+    .menu-container li {
+        width                            : 100%;
+        text-align                        : center;
+    }
+
+    .dropdown-menu {
+        position                         : static;
+        box-shadow                       : none;
+        background                        : var(--Blue100);
+        display                           : none;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display                           : block;
+    }
+}

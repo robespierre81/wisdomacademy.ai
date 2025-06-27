@@ -1,0 +1,23 @@
+{
+  "genesis": {
+    "extraData": "",
+    "difficulty": "0x1",
+    "gasLimit": "0x1fffffffffffff"
+  },
+  "blockchain": {
+    "chainId": 2307,
+    "ibft2": {
+      "blockperiodseconds": 5,
+      "epochlength": 30000,
+      "requesttimeoutseconds": 10
+    }
+  },
+  "nodes": [
+    {
+      "address": "5ae47b3d0206fa42386189cf33bc21e3938a0386"
+    },
+    {
+      "address": "9fbd91f1e2624c432ad4285d0bd1930bb03d7c9a"
+    }
+  ]
+}

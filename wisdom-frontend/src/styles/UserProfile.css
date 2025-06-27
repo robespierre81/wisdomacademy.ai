@@ -1,0 +1,184 @@
+/* ✅ User Profile Styling */
+.user-profile {
+    max-width                           : 400px;
+    background                          : var(--CoolGray10);
+    padding                             : 20px;
+    border-radius                       : 10px;
+    text-align                          : center;
+    box-shadow                          : 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin                              : 20px auto;
+    border                              : 1px solid var(--CoolGray20);
+    transition                          : transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Hover Effect for Profile Box */
+.user-profile:hover {
+    transform                           : scale(1.02);
+    box-shadow                          : 0px 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ Profile Header */
+.profile-header {
+    display                             : flex;
+    flex-direction                      : column;
+    align-items                         : center;
+}
+
+/* ✅ Profile Picture */
+.profile-pic {
+    width                               : 100px;
+    height                              : 100px;
+    border-radius                       : 50%;
+    object-fit                          : cover;
+    border                              : 3px solid var(--Blue60);
+    transition                          : border-color 0.3s ease-in-out;
+}
+
+/* Profile Picture Hover Effect */
+.profile-pic:hover {
+    border-color                        : var(--Blue50);
+}
+
+/* ✅ Wallet Address */
+.wallet-address {
+    font-size                           : 12px;
+    word-break                          : break-word;
+    color                               : var(--CoolGray40); /* 🔹 Improved readability */
+    background-color                    : var(--CoolGray20);
+    padding                             : 6px;
+    border-radius                       : 5px;
+    margin-top                          : 5px;
+}
+
+/* ✅ Connect Button */
+.connect-btn {
+    background-color                    : var(--Blue60);
+    color                               : white;
+    border                              : none;
+    padding                             : 10px 15px;
+    margin-top                          : 10px;
+    border-radius                       : 5px;
+    cursor                              : pointer;
+    transition                          : background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Button Hover Effect */
+.connect-btn:hover {
+    background-color                    : var(--Blue50);
+    transform                           : scale(1.05);
+}
+
+/* ✅ Badges Section */
+.badges-section {
+    margin-top                          : 15px;
+    padding                             : 10px;
+    background                          : var(--CoolGray20);
+    border-radius                       : 8px;
+    box-shadow                          : inset 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Badges Container */
+.badges-container {
+    display                             : flex;
+    flex-wrap                           : wrap;
+    justify-content                     : center;
+    gap                                 : 8px;
+}
+
+/* ✅ Individual Badge */
+.badge {
+    background                          : var(--Blue50); /* 🔹 Slightly softer blue */
+    color                               : white;
+    padding                             : 6px 12px;
+    border-radius                       : 15px;
+    font-size                           : 14px;
+    transition                          : background-color 0.3s ease-in-out;
+}
+
+/* Badge Hover Effect */
+.badge:hover {
+    background-color                    : var(--Blue60);
+}
+
+
+.user-profile {
+    max-width: 400px;
+    background: var(--CoolGray10);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    margin-top: 80px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.user-profile:hover {
+    transform: scale(1.02);
+}
+
+/* ✅ Profile Header */
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ✅ Profile Picture */
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--Blue60);
+    margin-bottom: 10px;
+}
+
+/* ✅ Form Fields */
+input, textarea {
+    width: 90%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid var(--CoolGray40);
+    background: var(--CoolGray20);
+    color: var(--CoolGray70);
+}
+
+/* ✅ Buttons */
+.connect-btn, .update-btn {
+    background-color: var(--Blue60);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.connect-btn:hover, .update-btn:hover {
+    background-color: var(--Blue50);
+}
+
+/* ✅ Achievements & Learning Plans */
+.badges-section, .learning-plans-section {
+    margin-top: 15px;
+    padding: 10px;
+    background: var(--CoolGray20);
+    border-radius: 8px;
+}
+
+.badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.badge {
+    background: var(--Blue50);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+}

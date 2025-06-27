@@ -1,0 +1,15 @@
+# Node configuration for Nimbus beacon node
+web3-url = ["http://192.168.1.100:8551"]
+data-dir = "/data"
+jwt-secret = "/shared-jwt/jwt.hex"
+rest = true
+rest-address = "0.0.0.0"
+rest-port = 5052
+log-level = "DEBUG"
+doppelganger-detection = false  # From example, optional
+non-interactive = true          # Run without prompts
+subscribe-all-subnets = true    # Optimize for validator duties
+enr-auto-update = true          # Auto-update ENR for networking
+tcp-port = 9000                 # Default P2P port
+udp-port = 9000                 # Default discovery port
+history = "prune"               # Minimize disk usage

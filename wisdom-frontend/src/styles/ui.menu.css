@@ -1,0 +1,48 @@
+.menubar {
+    background-color            : var(--Blue100);
+    color                       : var(--CoolGray20);
+    border-bottom               : 1px solid #000;
+    position                    : absolute;
+    left                        : 0;
+    right                       : 0;
+    top                         : 0;
+    height                      : 53px;
+    width                       : 100%;
+    display                     : flex;
+    align-items                 : center; /* Center items vertically */
+    justify-content             : space-between; /* Space items evenly */
+    padding                     : 0 20px;
+}
+
+/* Left section (Logo) */
+.menu-logo {
+    height                      : 40px;
+    display                     : flex;
+    align-items                 : center;
+}
+
+.menu-logo img {
+    height                      : 40px; /* Adjust size as needed */
+}
+
+/* Right section (Last item) */
+.menu-right {
+    display                     : flex;
+    align-items                 : center;
+}
+
+/* Centered menu */
+.menu-container {
+    display                     : flex;
+    flex                        : 1; /* Take remaining space */
+    justify-content             : center; /* Center menu */
+}
+
+.menu-item {
+    font-family                 : 'HelveticaThin';
+    color                       : var(--CoolGray20);
+}
+
+.menu-item a {
+    color                       : var(--CoolGray20);
+}

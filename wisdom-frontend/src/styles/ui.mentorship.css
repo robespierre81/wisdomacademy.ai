@@ -1,0 +1,31 @@
+.mentorship-page {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.mentorship-page h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.mentorship-page form input,
+.mentorship-page form textarea {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.mentorship-page ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.mentorship-page li {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+}

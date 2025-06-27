@@ -1,0 +1,227 @@
+
+
+/** Farbdefinition **/
+:root {
+    --Blue100               :rgb(  0,  17,  65);
+    --Blue60                :rgb( 20,  90, 230);
+    --Blue50                :rgb( 50, 120, 255);
+    --Blue30                :rgb(130, 180, 255);
+    --Blue20                :rgb(208, 226, 255);
+    --Blue10                :rgb(237, 245, 255);
+    --Cyan90                :rgb(  1,  39,  73);
+    --Cyan70                :rgb(  0,  70, 140);
+    --CoolGray70            :rgb( 60,  60,  65);
+    --CoolGray40            :rgb(162, 169, 176);
+    --CoolGray20            :rgb(221, 225, 230);
+    --CoolGray10            :rgb(242, 244, 248);
+    --SuccessGreen          :rgb( 34, 197,  94); /* Light Green */
+    --WarningOrange         :rgb(255, 140,   0); /* Orange Warning */
+    --ErrorRed              :rgb(220,  38,  38); /* Red Errors */
+}
+
+*,
+:after,
+:before {
+	box-sizing: border-box
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	line-height: 1.15
+}
+
+html, body {
+    margin                  : 0px;
+    padding                 : 0px;
+    font-family             : railway, helvetica, verdana, sans-serif;
+    position                : absolute;
+    top                     : 0px;
+    bottom                  : 0px;
+    left                    : 0px;
+    right                   : 0px;
+    overflow                : auto;
+    background              : var(--CoolGray10);
+}
+
+#content {
+    display                 : inline-block;
+    position                : absolute;
+    left                    : 0px;
+    bottom                  : 0px;
+    right                   : 0px;
+    top                     : 150px;
+    background-color        : rgba(150,150,150,0.1);
+}
+
+#contentPane {
+    display                 : inline-block;
+    position                : absolute;
+    left                    : 0px;
+    bottom                  : 0px;
+    right                   : 0px;
+    top                     : 50px;
+    background-color        : var(--CoolGray10);
+    padding                 : 0.5em;
+}
+
+#inhaltLaden {
+    display                 : block;
+    height                  : 5em;
+    width                   : 5em;
+    margin-left             : auto;
+    margin-right            : auto;
+    margin-top              : 4em;
+    font-weight             : 900;
+    font-size               : 30px;
+}
+
+#contentPane h2 {
+    display                 : block;
+    position                : absolute;
+    left                    : 0px;
+    right                   : 0px;
+    top                     : 0px;
+    text-align              : center;
+    margin                  : 0px;
+    height                  : 30px;
+    border-bottom           : 2px solid rgba(50,50,250,0.5);
+    padding-top             : 5px;
+    color                   : rgba(50,50,150,1.0);
+    font-size               : 25px;
+    font-family             : helveticathin;
+}
+
+#contentPane table {
+    width                   : 100%;
+    margin-top              : 35px;
+    font-size               : 20px;
+}
+
+#contentPane table th {
+    height                  : 35px;
+    padding-top             : 5px;
+    margin-top              : 0px;
+}
+
+#contentPane table th:hover {
+    background-color        : rgba(50,50,250,0.1);
+}
+
+#contentcontent {
+    padding                 : 10px;
+    overflow                : auto;
+}
+
+#contentcontent table {
+    width                   : 100%;
+    margin-top              : 0px;
+    font-size               : 14px;
+    overflow-y              : auto;
+}
+
+#contentcontent #vorhandeneGruppen, #contentcontent #vorhandeneGruppenBenutzer {
+    display                 : inline-block;
+    border                  : 1px solid black;
+    width                   : 148px;
+    height                  : 250px;
+    overflow-y              : auto;
+    font-size               : 12px;
+    background-color        : white;
+    overflow                : hidden;
+    margin                  : 0px;
+    padding                 : 0px;
+}
+
+#contentcontent #vorhandeneGruppen td {
+    display                 : inline-block;
+    width                   : 143px;
+    margin                  : 0px;
+    padding                 : 0px;
+    padding-top             : 5px;
+    padding-left            : 5px;
+    height                  : 18px;
+}
+
+#contentcontent #vorhandeneGruppen td:hover {
+    background-color        : rgba(50,50,250,0.1);
+}
+
+#contentcontent .liste {
+    display                 : inline-block;
+    width                   : 150px;
+    float                   : left;
+}
+
+#ausgabe {
+    margin                  : 0px;
+    padding                 : 0px;
+}
+
+#NewProjectForm, #NewTaskForm {
+    
+}
+
+#NewProjectForm label, #NewTaskForm label {
+    display                 : inline-block;
+    width                   : 150px;
+}
+
+#NewProjectForm input, #NewTaskForm input {
+    display                 : inline-block;
+    width                   : 250px;
+}
+
+#NewProjectForm textarea, #NewTaskForm textarea {
+    display                 : inline-block;
+    width                   : 250px;
+    height                  : 300px;
+}
+
+#TasksHistory {
+    display                 : inline-block;
+    position                : absolute;
+    bottom                  : 20px;
+    top                     : 150px;
+    left                    : 10px;
+    right                   : 55%;
+    overflow                : auto;
+}
+
+#TasksHistory .tasks {
+    font-family             : monospace;
+}
+
+.JobDone, .JobRed, .JobYellow, .JobGreen {
+    font-size               : 14px;
+}
+.JobDone {
+    color                   : violet;
+}
+.JobRed {
+    color                   : red;
+}
+.JobYellow{
+    color                   : yellow;
+}
+.JobGreen {
+    color                   : green;
+}
+
+.center {
+    text-align              : center;
+}
+
+.rechts {
+    text-align              : right;
+}
+
+.impressum {
+    font-size               : 0.95rem;
+    color                   : #333;
+    background-color        : #f8f8f8;
+}
+
+.impressum a {
+    color                   : #007BFF;
+    text-decoration         : underline;
+}

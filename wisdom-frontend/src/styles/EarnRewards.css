@@ -1,0 +1,58 @@
+.earn-rewards {
+    text-align                          : center;
+    padding                             : 40px;
+    background-color                    : var(--CoolGray10);
+    min-height                          : 100vh;
+    margin-top                          : 100px;
+}
+
+.earn-rewards h1 {
+    font-size                           : 2rem;
+    color                               : var(--Blue100);
+    margin-bottom                       : 20px;
+}
+
+.earn-rewards p {
+    font-size                           : 1.1rem;
+    color                               : var(--CoolGray70);
+    margin-bottom                       : 15px;
+}
+
+.earn-rewards ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.earn-rewards li {
+    background-color: var(--CoolGray20);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: var(--Blue100);
+}
+
+.earn-rewards button {
+    background-color: var(--Cyan70);
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease-in-out;
+}
+
+.earn-rewards button:hover {
+    background-color: var(--Blue60);
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--Cyan70);
+}

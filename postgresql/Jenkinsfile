@@ -1,0 +1,142 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = "ssh://bodi@74.208.195.193:1981/work/git/postgresql.git"
+        PRIMARY_HOST = "127.0.0.1"
+        REPL_USER = "replicator"
+        REPL_PASSWORD = "Bodi#Olga#2021"
+        POSTGRES_VERSION = "17"
+        DOCKER_IMAGE = "my-postgres"
+        REPLICA_CONTAINER1 = "pg-replica-1"
+        REPLICA_CONTAINER2 = "pg-replica-2"
+        DOCKER_NETWORK = "pg_network"
+        CONTAINER_NAME = "postgres_container"
+        DOCKERFILE_DIR = "./"
+        REPLICA_CONTAINERS = "pg-replica-1,pg-replica-2"
+    }
+
+    stages {
+        stage('Clone Git Repository') {
+            steps {
+                git branch: 'main', 
+                    credentialsId: 'bodi', 
+                    url: "${GIT_REPO}"
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.withServer('tcp://74.208.195.193:2375') {
+                        sh "docker build -t ${DOCKER_IMAGE} ."
+                    }
+                }
+            }
+        }
+
+        stage('Start PostgreSQL Replicas') {
+            steps {
+                script {
+                    docker.withServer('tcp://74.208.195.193:2375') {
+                        sh """
+                            echo "🔹 Stopping existing replica containers..."
+                            docker stop ${REPLICA_CONTAINER1} || true
+                            docker stop ${REPLICA_CONTAINER2} || true
+                            docker rm ${REPLICA_CONTAINER1} || true
+                            docker rm ${REPLICA_CONTAINER2} || true
+
+                            echo "🔹 Starting PostgreSQL replicas..."
+                            docker run -d --name ${REPLICA_CONTAINER1} \
+                            --network=host \
+                            -e POSTGRES_USER=${REPL_USER} \
+                            -e POSTGRES_PASSWORD=${REPL_PASSWORD} \
+                            -e PGPORT=5433 \
+                            -p 5433:5432 \
+                            ${DOCKER_IMAGE}
+
+                            docker run -d --name ${REPLICA_CONTAINER2} \
+                            --network=host \
+                            -e POSTGRES_USER=${REPL_USER} \
+                            -e POSTGRES_PASSWORD=${REPL_PASSWORD} \
+                            -e PGPORT=5434 \
+                            -p 5434:5432 \
+                            ${DOCKER_IMAGE}
+
+                            echo "🔹 Waiting for replicas to initialize..."
+                            sleep 10
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Initialize Replicas') {
+            steps {
+                script {
+                    docker.withServer('tcp://74.208.195.193:2375') {
+                        def replicas = REPLICA_CONTAINERS.split(',')
+
+                        for (replica in replicas) {
+                            sh """
+                                echo "🔹 Stopping PostgreSQL on ${replica}..."
+                                docker exec -i ${replica} pkill -9 -u postgres || true
+
+                                echo "🔹 Removing old PostgreSQL data directory..."
+                                docker exec -i ${replica} bash -c "
+                                    rm -rf /var/lib/postgresql/data/*
+                                    rm -rf /var/lib/postgresql/data/pg_wal
+                                    rm -rf /var/lib/postgresql/data/postmaster.pid
+                                    rm -rf /var/lib/postgresql/data/postmaster.opts
+                                    rm -rf /var/lib/postgresql/data/global/pg_control
+                                "
+
+                                echo "🔹 Ensuring correct permissions..."
+                                docker exec -i ${replica} bash -c "
+                                    mkdir -p /var/lib/postgresql/data
+                                    chown -R postgres:postgres /var/lib/postgresql/data
+                                    chmod 700 /var/lib/postgresql/data
+                                "
+
+                                echo "🔹 Performing base backup from primary for ${replica}..."
+                                docker exec -i ${replica} bash -c "
+                                    PGPASSWORD='${REPL_PASSWORD}' pg_basebackup -h ${PRIMARY_HOST} -U ${REPL_USER} -D /var/lib/postgresql/data -Fp -Xs -P -R -p 5432
+                                "
+
+                                echo "🔹 Creating standby signal file for ${replica}..."
+                                docker exec -i ${replica} bash -c "touch /var/lib/postgresql/data/standby.signal"
+
+                                echo "🔹 Starting PostgreSQL on ${replica}..."
+                                docker exec -i ${replica} bash -c "
+                                    pg_ctl start -D /var/lib/postgresql/data -l /var/log/postgresql/startup.log
+                                "
+
+                                echo "🔹 Checking logs for errors on ${replica}..."
+                                docker exec -i ${replica} bash -c "
+                                    tail -n 50 /var/log/postgresql/startup.log
+                                "
+                            """
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Verify Replication') {
+            steps {
+                script {
+                    sh """
+                    echo "🔹 Checking replication status on PRIMARY..."
+                    docker exec -i ${CONTAINER_NAME} psql -c "SELECT client_addr, state, sync_state FROM pg_stat_replication;"
+
+                    echo "🔹 Checking replication status on REPLICA 1..."
+                    docker exec -i ${REPLICA_CONTAINER1} psql -c "SELECT client_addr, state, sync_state FROM pg_stat_wal_receiver;"
+
+                    echo "🔹 Checking replication status on REPLICA 2..."
+                    docker exec -i ${REPLICA_CONTAINER2} psql -c "SELECT client_addr, state, sync_state FROM pg_stat_wal_receiver;"
+                    """
+                }
+            }
+        }
+    }
+}
